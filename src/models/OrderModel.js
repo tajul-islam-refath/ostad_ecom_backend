@@ -2,12 +2,11 @@ const { Schema, model } = require("mongoose");
 
 const orderSchema = new Schema(
   {
-    cName: {
+    customerName: {
       type: String,
     },
-    cEmail: { type: String },
+    customerEmail: { type: String },
     address: { type: String },
-    price: { type: Number },
     products: [
       {
         title: { type: String },

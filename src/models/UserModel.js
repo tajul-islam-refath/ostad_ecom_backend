@@ -8,7 +8,7 @@ const userSchema = new Schema(
     },
     name: { type: String },
     password: { type: String },
-    profile: { type: String },
+    role: { type: String, default: "user" },
   },
   { timestamps: true }
 );

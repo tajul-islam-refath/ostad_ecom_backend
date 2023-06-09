@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const createFirstUser = require("./defaultUser");
 
 const connectDatabase = () => {
   let dbName = process.env.DB_NAME;
@@ -13,6 +14,7 @@ const connectDatabase = () => {
       console.log(err);
     } else {
       console.log("Connect database successfully");
+      createFirstUser();
     }
   });
 };

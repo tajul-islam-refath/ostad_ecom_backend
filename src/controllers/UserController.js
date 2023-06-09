@@ -13,7 +13,7 @@ exports.register = async (req, res, next) => {
       });
     }
 
-    let hashPassword = await bcrypt.hash(password, 11);
+    let hashPassword = await bcrypt.hash(password, 9);
 
     const user = new User({
       email,
@@ -38,7 +38,6 @@ exports.register = async (req, res, next) => {
 exports.login = async (req, res, next) => {
   let body = req.body;
   try {
-
     let user = await User.findOne({ email: body.email });
 
     if (!user) {
@@ -49,7 +48,7 @@ exports.login = async (req, res, next) => {
     }
 
     const match = await bcrypt.compare(body.password, user.password);
-    console.log(match)
+
     if (!match) {
       return res.status(401).json({
         success: false,
@@ -66,6 +65,11 @@ exports.login = async (req, res, next) => {
     res.status(200).json({
       success: true,
       token,
+      user: {
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
     });
   } catch (err) {
     res.status(400).json({
@@ -101,6 +105,28 @@ exports.profileDetails = async (req, res) => {
           _id: 1,
           email: 1,
           name: 1,
+          role: 1,
+        },
+      },
+    ]);
+
+    res.status(200).json({ success: true, data: data });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ success: false, message: err });
+  }
+};
+
+exports.userList = async (req, res) => {
+  try {
+    let data = await User.aggregate([
+      { $match: {} },
+      {
+        $project: {
+          _id: 1,
+          email: 1,
+          name: 1,
+          role: 1,
         },
       },
     ]);
