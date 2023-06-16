@@ -42,7 +42,7 @@ router.put("/products/:id", authVerifyMiddleware, updateProduct);
 router.delete("/products/:id", authVerifyMiddleware, deleteProduct);
 
 // order route
-router.get("/orders", getOrderList);
+router.get("/orders", authVerifyMiddleware, getOrderList);
 router.get("/orders/me", authVerifyMiddleware, getOrderListByUser);
 router.post("/orders/new", authVerifyMiddleware, createOrder);
 module.exports = router;

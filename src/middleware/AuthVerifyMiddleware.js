@@ -15,8 +15,8 @@ module.exports = (req, res, next) => {
     req.email = email;
     next();
   } catch (err) {
-    res.status(500).json({
-      success: "fail",
+    res.status(401).json({
+      success: false,
       data: err,
     });
   }

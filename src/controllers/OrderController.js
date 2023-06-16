@@ -2,22 +2,14 @@ const Order = require("../models/OrderModel");
 
 // create order
 exports.createOrder = async (req, res, next) => {
-  const { products, totalPrice, address } = req.body;
+  const { products, totalPrice, name, email, address } = req.body;
   try {
-    let email = req.email;
-    let user = await User.aggregate([
-      { $match: { email: email } },
-      {
-        $project: {
-          _id: 1,
-          email: 1,
-          name: 1,
-        },
-      },
-    ]);
+    let authEmail = req.email;
+
     const order = new Order({
-      customerName: user.name,
-      customerEmail: user.email,
+      customer: authEmail,
+      name: name,
+      email: email,
       address,
       products,
       totalPrice,
@@ -41,10 +33,10 @@ exports.createOrder = async (req, res, next) => {
 exports.getOrderList = async (req, res, next) => {
   try {
     let orderList = await Order.find();
-
+    console.log(orderList);
     res.status(200).json({
       success: true,
-      orderList,
+      data: orderList,
     });
   } catch (err) {
     res.status(400).json({
@@ -58,7 +50,7 @@ exports.getOrderList = async (req, res, next) => {
 exports.getOrderListByUser = async (req, res) => {
   let email = req.email;
   try {
-    let data = await Order.find({ email: email });
+    let data = await Order.find({ customer: email });
 
     res.status(200).json({ success: true, data: data });
   } catch (err) {

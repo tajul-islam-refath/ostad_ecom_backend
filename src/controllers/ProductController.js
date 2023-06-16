@@ -17,6 +17,7 @@ exports.createProduct = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
+      message: "Product create successfully",
     });
   } catch (err) {
     console.log(err.message);
@@ -52,7 +53,7 @@ exports.getSingleProduct = async (req, res, next) => {
 
     res.status(200).json({
       success: true,
-      product,
+      data: product,
     });
   } catch (err) {
     res.status(400).json({
@@ -66,6 +67,7 @@ exports.updateProduct = async (req, res, next) => {
   let id = req.params.id;
   try {
     await Product.findOneAndUpdate({ _id: id }, req.body);
+    console.log("updated");
     res.status(200).json({
       success: true,
       message: "Product updated successfully",

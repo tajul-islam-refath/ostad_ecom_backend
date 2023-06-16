@@ -2,10 +2,11 @@ const { Schema, model } = require("mongoose");
 
 const orderSchema = new Schema(
   {
-    customerName: {
+    customer: { type: String },
+    name: {
       type: String,
     },
-    customerEmail: { type: String },
+    email: { type: String },
     address: { type: String },
     products: [
       {
