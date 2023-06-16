@@ -1,4 +1,4 @@
-# Task Manager
+# Ecome backend
 
 ### setup .env file like this
 
@@ -12,5 +12,5 @@ DB_PASS= mongodb database pass
 ### Start application
 
 ```
-npm run start
+npm run dev
 ```
