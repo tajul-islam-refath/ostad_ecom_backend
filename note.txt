@@ -1,0 +1,11 @@
+1.client side: https://github.com/tajul-islam-refath/ostad_ecom_front
+2. server side: https://github.com/tajul-islam-refath/ostad_ecom_backend
+3. live: https://exquisite-pithivier-f75827.netlify.app
+
+admin:
+email:admin@gmail.com
+pass:admin
+
+user:
+email:user@gmail.com
+pass:user
